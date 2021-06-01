@@ -112,7 +112,9 @@ $ mkdir templates
 ```
 
 #### Adding some content to the home.html
+```
 <h1>Testing</h1>
+```
 
 #### Configure the views.py of the app
 ```
@@ -142,3 +144,11 @@ urlpatterns = [
     path('', HomePageView.as_view(), name='home'), 
 ]
 ```
+### Give a try
+1. Make a about page linking by using the methods we have before
+2. Add 'about/' in the urls.py of your app
+```
+from .views import HomePageView, AboutPage
+path('about/', AboutPage.as_view(), name='about'), 
+```
+Steps: views -> template (add the about.html) -> both urls.py if neccesary 
