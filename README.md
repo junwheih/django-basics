@@ -153,7 +153,7 @@ path('about/', AboutPage.as_view(), name='about'),
 ```
 Steps: views -> template (add the about.html) -> both urls.py if neccesary 
 
-### Extending Templates
+### Extending Templates : Page 42
 Ease the process of repeating content on every page (header, footer, etc).
 1. Create a base.html in templates
 ```
@@ -167,3 +167,13 @@ Ease the process of repeating content on every page (header, footer, etc).
 ```
 2. Block tag called content is added, these blocks can be overwritten by child templates via inheritance.
 3. It is optional to put the name `content` for the endblock, you can use `{% endblock %}` is enough.
+4. Make the home.html and about.html to extend the base.html
+```
+<!-- Make sure to have the `'` -->
+{% extends 'base.html' %} 
+
+{% block content %}
+<h1>This is the homepage</h1>
+{% endblock %}
+```
+
