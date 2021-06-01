@@ -81,9 +81,13 @@ $ git init      : Initialize it.
 $ git status    : Checking the current status of the working directory
 $ git add .     : Tracking the current file
 $ git add -A    : Adding all the file
+$ git commit -m "Message" : Adding the commit msg desc
+!!! Note: https://www.youtube.com/watch?v=NRf1LeQju2g for django best practice
+$ git push      : Pushing the committed files
 
 ### Adding git alias
 1. Find .gitconfig under user directory and edit
+2. Mine: "C:\Users\Acer\.gitconfig"
 ```
 [alias]
 	st = status
@@ -96,3 +100,45 @@ $ git add -A    : Adding all the file
 ```
 2. Next time to check status
 $ git st
+
+### Creating templates for the views : Page 38
+$ cd app
+$ mkdir templates
+
+#### Update config/settings.py
+1. Tell Django the location of our new templates directory. This is a one-line change to the setting 'DIRS' under TEMPLATES.
+```
+'DIRS': [str(BASE_DIR.joinpath('templates'))], # Added to link
+```
+
+#### Adding some content to the home.html
+<h1>Testing</h1>
+
+#### Configure the views.py of the app
+```
+from django.views.generic import TemplateView
+
+class HomePageView(TemplateView):
+    template_name = 'home.html'
+```
+
+#### Update the urls.py from the config then that of the app
+1. config/urls.py
+```
+from django.contrib import admin
+from django.urls import path, include
+
+urlpatterns = [
+    path('admin/', admin.site.urls),
+    path('', include('pages.urls')) # Newly added
+]
+```
+2. app/urls.py
+```
+from django.urls import path
+from .views import HomePageView
+
+urlpatterns = [
+    path('', HomePageView.as_view(), name='home'), 
+]
+```
