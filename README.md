@@ -144,7 +144,7 @@ urlpatterns = [
     path('', HomePageView.as_view(), name='home'), 
 ]
 ```
-### Give a try
+### Give a try : Add an about page
 1. Make a about page linking by using the methods we have before
 2. Add 'about/' in the urls.py of your app
 ```
@@ -152,3 +152,18 @@ from .views import HomePageView, AboutPage
 path('about/', AboutPage.as_view(), name='about'), 
 ```
 Steps: views -> template (add the about.html) -> both urls.py if neccesary 
+
+### Extending Templates
+Ease the process of repeating content on every page (header, footer, etc).
+1. Create a base.html in templates
+```
+<header>
+    <a href="{% url 'home' %}">Home</a>
+    <a href="{% url 'about' %}">About</a>
+</header>
+
+{% block content %}
+{% endblock content %}
+```
+2. Block tag called content is added, these blocks can be overwritten by child templates via inheritance.
+3. It is optional to put the name `content` for the endblock, you can use `{% endblock %}` is enough.
